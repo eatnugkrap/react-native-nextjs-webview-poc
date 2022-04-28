@@ -3,26 +3,18 @@ import type { AppProps } from "next/app";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
+const messageHandler = (event: MessageEvent) => {
+  console.log(event);
+};
+
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      window.ReactNativeWebView?.postMessage("addHistory");
-    };
-
-    router.events.on("beforeHistoryChange", handleRouteChange);
-
+    window.addEventListener("message", messageHandler);
     return () => {
-      router.events.off("beforeHistoryChange", handleRouteChange);
+      window.removeEventListener("message", messageHandler);
     };
-  }, [router]);
-
-  useEffect(() => {
-    window.addEventListener("message", (e) => {
-      console.log(e);
-    });
   }, []);
+
   return <Component {...pageProps} />;
 }
 

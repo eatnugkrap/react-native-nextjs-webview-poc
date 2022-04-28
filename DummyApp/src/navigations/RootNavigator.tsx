@@ -18,12 +18,6 @@ const DataStack = createStackNavigator();
 
 const What = createStackNavigator();
 
-const WhatS = () => (
-  <What.Navigator>
-    <What.Screen name="WebView" component={WebViewScreen} />
-  </What.Navigator>
-);
-
 const HomeStackNavigator = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
@@ -43,11 +37,10 @@ const DataStackNavigator = () => (
 
 const RootNavigation = () => (
   <NavigationContainer>
-    <HomeStackNavigator />
-    {/* <Tab.Navigator>
+    <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeStackNavigator} />
       <Tab.Screen name="Data" component={DataStackNavigator} />
-    </Tab.Navigator> */}
+    </Tab.Navigator>
   </NavigationContainer>
 );
 
