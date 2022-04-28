@@ -29,3 +29,17 @@ react native - nextjs 웹뷰 poc
   - 나중에 보기
 - [-] [체크리스트(https://shylog.com/settings-for-a-more-complete-webview/)
   - 나중에 보기
+
+
+### 돌려보기
+
+```
+DummyApp // RN 앱
+dummy-web // nextjs 웹
+```
+
+각 디렉토리에서 디펜던시 설치하고, 뭐 이것저것 다 세팅 한다음
+
+DummyApp 에서는 `DummyWebView.tsx`, `SSG.tsx`, `SSR.tsx` 에서 가각 웹뷰 컴포넌트의 source.uri 를 본인 아이피로 변경. 그 후  `yarn ios`
+
+dummy-web 에서는 `yarn dev`. ssg 로 돌려서 실제 로딩속도를 보고싶을땐 `yarn start`
