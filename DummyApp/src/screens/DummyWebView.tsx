@@ -20,7 +20,7 @@ const WebViewScreen = () => {
   };
 
   const messageHandler = (event: WebViewMessageEvent) => {
-    let message: string | object;
+    let message: any;
 
     try {
       message = JSON.parse(event.nativeEvent.data);
@@ -28,7 +28,9 @@ const WebViewScreen = () => {
       message = event.nativeEvent.data;
     }
 
-    console.log(message);
+    if (message?.type === 'history') {
+      setWebViewCanGoBack(message.idx > 0);
+    }
   };
 
   useEffect(() => {
@@ -41,6 +43,7 @@ const WebViewScreen = () => {
   return (
     <View style={{flex: 1}}>
       <WebView
+        domStorageEnabled
         onMessage={messageHandler}
         ref={webViewRef}
         style={{flex: 1}}
@@ -49,6 +52,21 @@ const WebViewScreen = () => {
           setWebViewCanGoBack(event.canGoBack);
         }}
         javaScriptEnabled
+        injectedJavaScript={`
+          function wrap(fn) { 
+            return function wrapper() { 
+                var res = fn.apply(this, arguments);
+                window.ReactNativeWebView.postMessage(JSON.stringify({type:'history',idx:arguments[0].idx})); 
+                return res; 
+            }; 
+          } 
+
+
+          history.pushState = wrap(history.pushState);
+          window.onpopstate = e => {
+            window.ReactNativeWebView.postMessage(JSON.stringify({type:'history',idx:e.state.idx}));
+          }
+        `}
       />
     </View>
   );
