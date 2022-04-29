@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 
 import React, {useEffect, useState} from 'react';
-import {Animated, BackHandler, View} from 'react-native';
+import {Animated, AsyncStorage, BackHandler, View} from 'react-native';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import WebView, {WebViewMessageEvent} from 'react-native-webview';
 
@@ -31,9 +31,15 @@ const WebViewScreen = () => {
     if (message?.type === 'history') {
       setWebViewCanGoBack(message.idx > 0);
     }
+    if (message?.type === 'send') {
+      AsyncStorage.getItem(message?.key).then((value) => {
+        console.log(value)
+      })
+    }
   };
 
   useEffect(() => {
+
     navigation.addListener('beforeRemove', handleBack);
     return () => {
       navigation.removeListener('beforeRemove', handleBack);
@@ -43,7 +49,6 @@ const WebViewScreen = () => {
   return (
     <View style={{flex: 1}}>
       <WebView
-        domStorageEnabled
         onMessage={messageHandler}
         ref={webViewRef}
         style={{flex: 1}}
