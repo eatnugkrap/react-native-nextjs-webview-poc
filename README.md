@@ -23,13 +23,13 @@ react native - nextjs 웹뷰 poc
   - ㅋㅋ String.replaceAll 없음.... 좀 조심해야할듯... 결국 소팅도 문제가 될거같은데....
 - [X] 로컬 스토리지
     - 별거 안해도 그냥 웹뷰 안에서 로컬스토리지 쓸 수 있는듯
-- [-] 데이터 넘겨주기, 리렌더링
+- [ ] 데이터 넘겨주기, 리렌더링
   - 나중에 보기
-- [-] 디바이스 사이즈 가져올 수 있는지
+- [ ] 디바이스 사이즈 가져올 수 있는지
   - 나중에 보기
-- [-] 이벤트, 에러 로깅
+- [ ] 이벤트, 에러 로깅
   - 나중에 보기
-- [-] [체크리스트(https://shylog.com/settings-for-a-more-complete-webview/)
+- [ ] [체크리스트](https://shylog.com/settings-for-a-more-complete-webview/)
   - 나중에 보기
 
 
